@@ -1,0 +1,11 @@
+Câu 1:
+
+ Cancel → bị coi là "No" (do code chưa xử lý)
+
+Câu 2:
+
+ Dùng:
+
+JOptionPane.showOptionDialog(...)
+
+→ để tạo nút tùy chỉnh
