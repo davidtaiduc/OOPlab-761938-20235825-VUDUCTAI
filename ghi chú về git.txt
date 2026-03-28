@@ -1,0 +1,14 @@
+Bước 1: Vào đúng thư mục project
+cd "D:\2025.2\data base\câu hỏi"
+🧩 Bước 2: Khởi tạo Git (QUAN TRỌNG NHẤT)
+git init
+
+👉 Nếu không có bước này → lỗi bạn đang gặp
+
+🧩 Bước 3: Add + commit
+git add .
+git commit -m "first commit"
+🧩 Bước 4: Kết nối với GitHub
+git remote add origin https://github.com/username/repo.git
+🧩 Bước 5: Push lên GitHub
+git push -u origin main
