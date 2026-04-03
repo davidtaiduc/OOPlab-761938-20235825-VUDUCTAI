@@ -1,3 +1,4 @@
-câu 1 : 
-trả lời No thì sẽ ra cancle tại vì không đề cập trong code 
-câu 2 :
+Câu 1:
+Cancel → bị coi là "No" (do code chưa xử lý)
+Câu 2:
+ Dùng:JOptionPane.showOptionDialog(...)
