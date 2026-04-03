@@ -1,0 +1,3 @@
+câu 1 : 
+trả lời No thì sẽ ra cancle tại vì không đề cập trong code 
+câu 2 :
