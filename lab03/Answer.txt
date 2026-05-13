@@ -1,0 +1,63 @@
+﻿Trả lời câu hỏi lab03 -OOP
+Câu 16:
+1. What are the advantages of Polymorphism?
+Linh hoạt: Xử lý các đối tượng khác nhau (như DigitalVideoDisc, Book, CompactDisc) qua lớp cha Media trong AIMS.
+Tái sử dụng mã: Gọi toString() hoặc play() trên Media mà không cần mã riêng cho từng loại.
+Dễ bảo trì: Thêm loại media mới (như Vinyl) không cần thay đổi mã của Cart hay Store.
+2. How is Inheritance useful to achieve Polymorphism in Java?
+Kế thừa tạo mối quan hệ "is-a": DigitalVideoDisc, Book, CompactDisc kế thừa Media, cho phép xử lý chúng như Media.
+Ghi đè phương thức: Polymorphism xảy ra khi toString() hoặc play() của lớp con được gọi qua tham chiếu Media.
+3. What are the differences between Polymorphism and Inheritance in Java?
+Polymorphism:
++)Ý nghĩa: Cho phép đối tượng hành xử khác nhau qua giao diện/lớp cha chung.
++)Mục đích: Linh hoạt, gọi phương thức đúng dựa trên loại đối tượng (như play() cho DigitalVideoDisc hoặc CompactDisc).
++)Loại: Compile-time (overloading) và Runtime (overriding).
++)Ví dụ: media.play() gọi phiên bản play() của lớp con.
+Inheritance:
++)Ý nghĩa: Lớp con kế thừa thuộc tính/phương thức từ lớp cha.
++)Mục đích: Tái sử dụng mã, tổ chức phân cấp (như DigitalVideoDisc kế thừa title, cost từ Media).
++)Loại: Kế thừa lớp (extends) hoặc giao diện (implements).
++)Ví dụ: DigitalVideoDisc dùng getTitle() từ Media.
+Khác biệt chính: Inheritance tạo cấu trúc phân cấp để tái sử dụng mã; Polymorphism tận dụng cấu trúc đó để xử lý đối tượng linh hoạt.
+
+
+
+
+
+
+Bài 17:
+1. Lớp nào nên triển khai giao diện Comparable?
+Lớp nên triển khai Comparable: Lớp Media nên triển khai giao diện Comparable<Media>.
+Lý do:
+Lớp Media là lớp cha trừu tượng của tất cả các loại media (DigitalVideoDisc, Book, CompactDisc). Các mặt hàng trong Cart và Store đều là các đối tượng của lớp Media hoặc các lớp con của nó.
+Việc triển khai Comparable trong Media cho phép tất cả các đối tượng media (bất kể là DVD, Book, hay CD) được so sánh với nhau một cách thống nhất khi sắp xếp trong Cart (ví dụ, trong các phương thức sortByTitleCost và sortByCostTitle).
+Nếu chúng ta triển khai Comparable trong các lớp con riêng lẻ (như DigitalVideoDisc), sẽ khó so sánh các loại media khác nhau (ví dụ, DVD với Book) trong cùng một danh sách itemsOrdered của Cart.
+Kết luận: Lớp Media sẽ triển khai Comparable<Media>, và các lớp con (DigitalVideoDisc, Book, CompactDisc) sẽ kế thừa khả năng so sánh này. Nếu cần các quy tắc sắp xếp đặc biệt (như cho DVD), chúng ta có thể ghi đè compareTo() trong lớp con tương ứng.
+2. Trong các lớp đó, làm thế nào để triển khai phương thức compareTo() để phản ánh thứ tự sắp xếp mong muốn?
+-Mục tiêu: Triển khai phương thức compareTo() trong lớp Media để sắp xếp các media theo một quy tắc mặc định. Dựa trên ngữ cảnh, giả sử quy tắc mặc định là theo tiêu đề (title) trước, sau đó theo giá (cost) (tương tự Media.COMPARE_BY_TITLE_COST trong mã trước).
+-Cách triển khai:
++)Phương thức compareTo(Media other) sẽ so sánh hai đối tượng Media dựa trên:
+Tiêu đề (title): So sánh chuỗi tiêu đề theo thứ tự từ điển (sử dụng String.compareToIgnoreCase() để không phân biệt hoa thường).
+Giá (cost): Nếu tiêu đề giống nhau, so sánh giá (cost) theo thứ tự tăng dần.
++)Trả về:
+Số âm nếu đối tượng hiện tại nhỏ hơn other.
+Số dương nếu đối tượng hiện tại lớn hơn other.
+0 nếu hai đối tượng bằng nhau.
+3. Có thể có hai quy tắc sắp xếp (theo tiêu đề rồi giá, và theo giá rồi tiêu đề) nếu sử dụng giao diện Comparable không?
+Câu trả lời: Không thể có hai quy tắc sắp xếp trực tiếp chỉ với giao diện Comparable.
+Lý do:
+Giao diện Comparable yêu cầu lớp triển khai một phương thức compareTo() duy nhất, định nghĩa một thứ tự tự nhiên (natural ordering) cố định cho các đối tượng. Ví dụ, nếu compareTo() được triển khai để sắp xếp theo tiêu đề rồi giá, thì đó là thứ tự duy nhất mà Collections.sort() sẽ sử dụng.
+Để hỗ trợ một quy tắc sắp xếp khác (như giá rồi tiêu đề), bạn cần sử dụng lớp Comparator riêng biệt, vì Comparable chỉ cho phép một cách so sánh duy nhất trong compareTo().
+Giải pháp thay thế:
+Sử dụng Comparator bổ sung: Để hỗ trợ quy tắc thứ hai (giá rồi tiêu đề), giữ lại các lớp MediaComparatorByCostTitle và MediaComparatorByTitleCost và sử dụng chúng trong các phương thức sắp xếp của Cart
+4. Nếu các DVD có quy tắc sắp xếp khác (theo tiêu đề, rồi độ dài giảm dần, rồi giá), làm thế nào để sửa đổi mã để hỗ trợ điều này?
+Mục tiêu: Các đối tượng DigitalVideoDisc sẽ được sắp xếp theo tiêu đề (tăng dần), độ dài (giảm dần), giá (tăng dần), trong khi các loại media khác (Book, CompactDisc) vẫn sử dụng quy tắc mặc định của Media (tiêu đề rồi giá).
+Cách tiếp cận:
+Lớp Media triển khai Comparable với quy tắc mặc định (tiêu đề rồi giá).
+Lớp DigitalVideoDisc ghi đè phương thức compareTo() để triển khai quy tắc sắp xếp đặc biệt (tiêu đề, độ dài giảm dần, giá).
+Khi sắp xếp danh sách itemsOrdered trong Cart, Collections.sort() sẽ gọi compareTo() tương ứng của mỗi đối tượng, đảm bảo các DVD được so sánh theo quy tắc riêng, trong khi các media khác sử dụng quy tắc của Media.
+Triển khai trong DigitalVideoDisc:
+Ghi đè compareTo() để so sánh:
+      1. Tiêu đề: Tăng dần, giống như trong Media.
+      2. Độ dài (length): Giảm dần (nếu tiêu đề giống nhau).
+      3. Giá (cost): Tăng dần (nếu tiêu đề và độ dài giống nhau).
