@@ -1,0 +1,17 @@
+1. Compare Swing and AWT elements:
+
+- Compare the top-level containers in Swing and AWT:
+Trong AWT, các top-level container thường là `Frame`, `Dialog`, `Applet`.
+Trong Swing, các top-level container tương ứng có thêm tiền tố "J": `JFrame`, `JDialog`, `JApplet`.
+Khác biệt cốt lõi là trong AWT, ta có thể thêm (add) trực tiếp các thành phần (components) vào container. Nhưng trong Swing, các thành phần không được thêm trực tiếp vào top-level container mà PHẢI được thêm vào một lớp trung gian gọi là `ContentPane` (ví dụ: `getContentPane().add()`).
+
+- Compare the class name of components in AWT and the corresponding class's name in Swing:
+Tên các lớp thành phần (components) trong Swing hầu hết đều giống với AWT nhưng được thêm tiền tố "J" ở đầu để phân biệt.
+Ví dụ: `Button` (AWT) -> `JButton` (Swing); `Label` (AWT) -> `JLabel` (Swing); `TextField` (AWT) -> `JTextField` (Swing).
+
+- Compare the event-handling of Swing and AWT applications:
+Cơ chế xử lý sự kiện (Event-handling) của cả AWT và Swing là hoàn toàn giống nhau. Swing tái sử dụng lại toàn bộ mô hình sự kiện ủy quyền (Delegation Event Model) của AWT. Cả hai đều sử dụng các Interface như `ActionListener`, `MouseListener` và các phương thức như `actionPerformed()` để phản hồi lại các tương tác của người dùng.
+
+- The resulting appearances of the applications developed using Swing and AWT might be different as well. Make comparisons:
+AWT: Là "Heavyweight components", giao diện của AWT phụ thuộc hoàn toàn vào hệ điều hành (OS) đang chạy máy ảo Java. Do đó, một ứng dụng AWT sẽ trông giống hệt một ứng dụng Windows thuần túy khi chạy trên Windows, nhưng lại mang giao diện Mac khi chạy trên macOS.
+Swing: Là "Lightweight components", được vẽ hoàn toàn bằng mã Java thay vì dùng tài nguyên của OS. Nhờ vậy, Swing đảm bảo giao diện đồng nhất (Look and Feel) trên mọi nền tảng hệ điều hành. Swing cũng hỗ trợ tính năng thay đổi giao diện linh hoạt (Pluggable Look and Feel) và nhìn chung mượt mà, hiện đại hơn AWT rất nhiều.
